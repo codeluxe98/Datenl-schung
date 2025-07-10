@@ -21,6 +21,13 @@ app.config['MAIL_PASSWORD'] = os.environ.get('GMAIL_PASS')
 
 mail = Mail(app)
 db = SQLAlchemy(app)
+
+
+# Ensure tables are created when the application starts
+with app.app_context():
+    db.create_all()
+
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -126,6 +133,7 @@ def request_deletion():
     flash('Löschungsanfragen wurden versendet.')
     return redirect(url_for('dashboard'))
 
+
 def _ensure_db_ready(retries: int = 10, delay: int = 2) -> None:
     """Wait for the database connection before creating tables."""
     from sqlalchemy.exc import OperationalError
@@ -143,4 +151,6 @@ def _ensure_db_ready(retries: int = 10, delay: int = 2) -> None:
 if __name__ == '__main__':
     _ensure_db_ready()
     db.create_all()
+
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
