@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block title %}Startseite{% endblock %}
+{% block content %}
+<div class="text-center">
+  <h1>Willkommen</h1>
+  <p>Diese Anwendung ermöglicht Ihnen die einfache Beantragung der Datenlöschung bei Brokern.</p>
+  {% if not current_user.is_authenticated %}
+  <a href="{{ url_for('register') }}" class="btn btn-primary">Jetzt registrieren</a>
+  {% endif %}
+</div>
+{% endblock %}
