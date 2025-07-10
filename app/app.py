@@ -21,6 +21,11 @@ app.config['MAIL_PASSWORD'] = os.environ.get('GMAIL_PASS')
 
 mail = Mail(app)
 db = SQLAlchemy(app)
+
+# Ensure tables are created when the application starts
+with app.app_context():
+    db.create_all()
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
@@ -127,5 +132,4 @@ def request_deletion():
     return redirect(url_for('dashboard'))
 
 if __name__ == '__main__':
-    db.create_all()
     app.run(host='0.0.0.0', port=5000)
