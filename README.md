@@ -12,8 +12,15 @@ Dieses Projekt stellt eine einfache Webanwendung bereit, mit der Nutzer die Lös
 
 ## Starten mit Docker
 
-1. Passen Sie in `docker-compose.yml` die Umgebungsvariablen für MySQL und Gmail an.
-2. Führen Sie anschließend aus:
+1. Erzeugen Sie zunächst einen Fernet-Schlüssel mit dem gleichen Python‑Befehl wie beim manuellen Start und tragen Sie ihn in `docker-compose.yml` bei `ENCRYPTION_KEY` ein:
+
+   ```bash
+   python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())'
+   ```
+
+   Der Schlüssel muss zwischen Neustarts gleich bleiben, damit zuvor verschlüsselte Daten wieder entschlüsselt werden können.
+2. Passen Sie in `docker-compose.yml` die weiteren Umgebungsvariablen für MySQL und Gmail an.
+3. Führen Sie anschließend aus:
 
 ```bash
 docker compose up --build
