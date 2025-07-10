@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Hallo {{ current_user.username }}</h2>
+<p>Email: {{ current_user.email }}</p>
+<p>Telefon: {{ current_user.phone }}</p>
+<a href="{{ url_for('request_deletion') }}" class="btn btn-danger">Datenlöschung bei Brokern beantragen</a>
+{% endblock %}
