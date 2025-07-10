@@ -21,6 +21,15 @@ docker compose up --build
 
 Die Weboberfläche ist danach unter `http://localhost:5000` erreichbar.
 
+## Benötigte Pakete
+
+Zum Kompilieren von `mysqlclient` werden einige Systempakete benötigt:
+
+* libmysqlclient-dev (oder libmariadb-dev)
+* build-essential
+
+Diese Pakete installiert das Dockerfile automatisch, bei einer lokalen Installation müssen sie zuvor manuell installiert werden.
+
 ## Manuelles Starten
 
 Alternativ können Sie die Anwendung lokal starten (Python 3.12 vorausgesetzt):
