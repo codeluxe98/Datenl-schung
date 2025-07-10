@@ -55,6 +55,8 @@ export GMAIL_PASS="yourpass"
 export ENCRYPTION_KEY="$(python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')"
 export SECRET_KEY="changeme"
 python app/app.py
+# oder alternativ
+flask --app app/app.py run
 ```
 
 ## Hinweise

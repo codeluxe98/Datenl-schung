@@ -23,10 +23,6 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 
 
-# Ensure tables are created when the application starts
-with app.app_context():
-    db.create_all()
-
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -148,9 +144,14 @@ def _ensure_db_ready(retries: int = 10, delay: int = 2) -> None:
     raise RuntimeError("Datenbankverbindung konnte nicht hergestellt werden")
 
 
-if __name__ == '__main__':
+@app.before_first_request
+def initialize() -> None:
+    """Ensure database is ready and create tables."""
     _ensure_db_ready()
-    db.create_all()
+    with app.app_context():
+        db.create_all()
+
 
 if __name__ == '__main__':
+    initialize()
     app.run(host='0.0.0.0', port=5000)
